@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode, useState } from 'react'
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 
 interface SupabaseProviderProps {
@@ -9,7 +9,8 @@ interface SupabaseProviderProps {
 }
 
 export default function SupabaseProvider({ children }: SupabaseProviderProps) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
+  // Use 'createClientComponentClient' que é a função correta para o App Router.
+  const [supabaseClient] = useState(() => createClientComponentClient())
 
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>
